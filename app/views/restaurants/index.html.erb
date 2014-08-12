@@ -1,0 +1,39 @@
+<h1>Restaurant reviews</h1>
+
+<% if user_signed_in? %>
+	<p><%= link_to "Sign out", destroy_user_session_path, method: :delete %></p>
+	<p><%= link_to 'Add a restaurant', new_restaurant_path %></p>
+<% else %>
+	<p>New user? <%= link_to "Sign up", new_user_registration_path %></p>
+	<p>Existing user? <%= link_to "Sign in", new_user_session_path %></p>
+<% end %>
+
+
+<% if @restaurants.any? %>
+	<% @restaurants.each do |restaurant| %>
+		<h2><%= restaurant.name %>, <%= restaurant.cuisine %></h2>
+
+		<% if restaurant.reviews.any? %>
+			<p><ul>
+				<% totalRating = 0.0 %>
+				<% restaurant.reviews.each do |review| %>
+					<% totalRating += review.rating %>
+					<li><%= "#{review.thoughts} (#{review.rating})" %></li>
+				<% end %>
+			</ul>
+			Average rating: <%= (totalRating / restaurant.reviews.count).round(1) %>
+		<% else %>
+			No reviews yet.
+		<% end %>
+
+		<% if user_signed_in? %>
+			<p><%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %></p>
+
+			<p><%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %>
+			<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+		<% end %>
+	<% end %>
+<% else %>
+	No restaurants
+<% end %>
+
