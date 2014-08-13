@@ -27,4 +27,37 @@ RSpec.describe Restaurant, :type => :model do
 			expect(Review.count).to eq 0
 		end
 	end
+
+	describe '#average_rating' do
+		let(:restaurant) {Restaurant.create(name: 'Nandos', cuisine: 'chicken')}
+
+		context 'has no reviews/ratings' do
+			it 'returns N/A' do
+				expect(restaurant.average_rating).to eq 'N/A'
+			end
+		end
+
+		context 'has 1 review' do
+			it 'returns that rating' do
+				restaurant.reviews.create(rating: 4)
+				expect(restaurant.average_rating).to eq 4
+			end
+		end
+
+		context 'has multiple reviews' do
+			it 'returns the average of all ratings' do
+				restaurant.reviews.create(rating: 3)
+				restaurant.reviews.create(rating: 5)
+				expect(restaurant.average_rating).to eq 4
+			end
+
+			it 'returns a float if average is a non-whole number' do
+				restaurant.reviews.create(rating: 4)
+				restaurant.reviews.create(rating: 5)
+				expect(restaurant.average_rating).to eq 4.5
+			end
+		end
+
+
+	end
 end

@@ -14,9 +14,89 @@
  *= require_self
  */
 
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
 body {
 
 }
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+
+
+#global-container {
+	width: 100%;
+	
+}
+
+	#global-header {
+		width: 100%;
+		height: 76px;
+		background-color: #af0606;
+		color: white;
+		font-size: 14px;
+		border-bottom: 1px solid #853330;
+		box-shadow: 0 0 5px rgba(78,2,2,0.76);
+	}
+
+		#user-header {
+			max-width: 960px;
+			margin: 0 auto;
+			display: flex;
+			padding: 0 15px;
+		}
+
+			#logo {
+				margin: 9px 15px 9px 0;
+				width: 120px;
+			}
+
+			#search-and-menu-area {
+				flex: 1;
+			}
+
+			#user-options {
+				width: 120px;
+				text-align: center;
+				padding-top: 15px;
+			}
+
+			#header-button {
+				max-width: 120px;
+				cursor: pointer;
+				color: rgba(255,255,255,0.95);
+				padding: 5px 16px;
+				border: 1px solid #7b0000;
+				background: #a20000;
+				background-image: linear-gradient(#be0100 4%, #a20000 5%, #7c0000);
+				border-radius: 3px;
+				margin: 0 auto;
+				margin-bottom: 6px;
+				font-weight: bold;
+			}
+
+			#header-link {
+				color: rgba(255,255,255,0.95);
+				font-size: 13px;
+				line-height: 1.38462em;
+				font-weight: bold;
+				text-decoration: none;
+			}
+
+	#main-body {
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 15px;
+	}
+
+		#main-body a {
+			color: royalblue;
+		}
 
 .field_with_errors {
   padding: 2px;

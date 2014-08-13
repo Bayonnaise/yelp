@@ -22,15 +22,15 @@ describe 'reviewing restaurants' do
 		click_button 'Leave review'
 
 		expect(current_path).to eq restaurants_path
-		expect(page).to have_content 'Not bad (3)'
+		expect(page).to have_content 'Not bad ★★★☆☆'
 	end
 
 	it 'displays the average rating of each restaurant' do
 		restaurant = Restaurant.first
 		restaurant.reviews.create(thoughts: 'Meh', rating: '3')
 		restaurant.reviews.create(thoughts: 'Uh', rating: '5')
-		restaurant.reviews.create(thoughts: 'What?', rating: '2')
+		restaurant.reviews.create(thoughts: 'What?', rating: '1')
 		visit '/restaurants'
-		expect(page).to have_content 'Average rating: 3.3'
+		expect(page).to have_content 'McDonalds, American ★★★☆☆'
 	end
 end

@@ -32,6 +32,8 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'rspec-collection_matchers'
+	gem 'poltergeist'
+	gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password

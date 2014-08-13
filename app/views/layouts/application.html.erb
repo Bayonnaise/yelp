@@ -3,16 +3,29 @@
 <head>
   <title>Yelp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta charset='utf8'>
 </head>
 <body>
+	<div id='global-container'>
+		<div id='global-header'>
+			<section id='user-header'>
+				<span id='logo'><a href=<%= root_path %>><%= image_tag('yelp-logo.png', size: '111x57') %></a></span>
+				<span id='search-and-menu-area'></span>
+				<span id='user-options'><%= render 'restaurants/user_handling' %></span>
+			</section>
+		</div>
 
-<%= notice %>
-<%= alert %>
+		<section id='main-body'>
+		
+			<%= notice %>
+			<%= alert %>
 
+			<%= yield %>
 
-<%= yield %>
+		</section>
 
+	</div>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
