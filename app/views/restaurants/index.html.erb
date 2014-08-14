@@ -1,33 +1,49 @@
 
 <h1>Restaurant reviews</h1>
 
+<div><h3><%= link_to 'Add a restaurant', new_restaurant_path %></h3></div>
+
 <% if @restaurants.any? %>
 	<% @restaurants.each do |restaurant| %>
 		<div class='restaurant-container'>
-			<h2><%= restaurant.name %>, <%= restaurant.cuisine %> <%= star_rating(restaurant.average_rating) %></h2>
+			
+			<div class='restaurant-header'>
+				<span class='restaurant-info'>
+					<h2><%= restaurant.name %>, <%= restaurant.cuisine %> <%= star_rating(restaurant.average_rating) %></h2>
+				</span>
+				<span class='restaurant-actions'>
+					<ul>
+						<% if user_signed_in? %>
+							<li><%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %></li>
+							<li><%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+						<% end %>
+						<li><%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %></li>
+					</ul>
+				</span>
+			</div>
 
-			<p><ul>
-				<% restaurant.reviews.each do |review| %>
-					<li><%= "#{review.thoughts} #{star_rating(review.rating)} - " %>
-						<span class='counter'><%= review.likes.count %></span>
-						<%=" like".pluralize(review.likes.count) %>
-						<%= link_to "Like", review_likes_path(review), class: 'like_link' %>
-					</li>
-				<% end %>
-			</ul>
+			<div class='restaurant-reviews'>
+				<ul>
+					<% restaurant.reviews.each do |review| %>
+						<div class='review-container'>
+							<li>
+								<span class='review-text'><%= "#{review.thoughts}" %></span>
+								<span class='review-rating-likes'>
+									<%= "#{star_rating(review.rating)} - " %>
+									<span class='like_counter'><%= review.likes.count %></span>
+									<%=" like".pluralize(review.likes.count) %>
+									<%= link_to "Like", review_likes_path(review), class: 'like_link' if user_signed_in? %></span>
+								</span>
+							</li>
+						</div>
+					<% end %>
+				</ul>
+			</div>
 
-			<% if user_signed_in? %>
-				<p><%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %></p>
-				<p><%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %>
-				<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-			<% end %>
 		</div>
 	<% end %>
 <% else %>
 	No restaurants
 <% end %>
 
-<% if user_signed_in? %>
-	<div><%= link_to 'Add a restaurant', new_restaurant_path %></div>
-<% end %>
 

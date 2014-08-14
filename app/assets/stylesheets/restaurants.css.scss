@@ -16,4 +16,40 @@ h3 {
 
 .restaurant-container {
 	padding: 10px;
+	border-radius: 10px;
+	border: 1px solid;
+	border-color: black;
+	margin: 10px;
 }
+
+	.restaurant-header {
+		display: flex;
+		justify-content: space-between;
+		vertical-align: middle;
+	}
+
+		.restaurant-info {
+			
+		}
+
+		.restaurant-actions {
+			margin-top: 5px;
+		}
+
+		.restaurant-actions li {
+			display: inline;
+			padding-right: 10px;
+		}
+
+	.restaurant-reviews {
+		margin-top: 5px;
+	}
+
+		.review-container {
+			padding: 5px;
+			margin: 5px;
+			border-radius: 5px;
+			border: 1px solid;
+			border-color: grey;
+		}
+

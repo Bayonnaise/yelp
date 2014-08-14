@@ -27,7 +27,8 @@ describe 'user sessions' do
 
 		it 'user cannot add a restaurant' do
 			visit '/restaurants'
-			expect(page).not_to have_content 'Add a restaurant'
+			click_link('Add a restaurant')
+			expect(page).not_to have_content 'Cuisine'
 		end
 
 		it 'user can sign in' do

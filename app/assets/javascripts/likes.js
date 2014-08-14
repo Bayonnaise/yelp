@@ -1,11 +1,11 @@
-$(document).ready(function () {
+$(document).ready(function() {
 	$('.like_link').on('click', function(event) {
 
-		var likeCount = $(this).siblings('.counter')
+		var likeCounter = $(this).siblings('.like_counter')
 		event.preventDefault();
 		
 		$.post(this.href, function(response) {
-			likeCount.text(response.new_likes_count);
+			likeCounter.text(response.new_likes_count);
 		})
 	})
 })
