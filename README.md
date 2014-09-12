@@ -3,7 +3,7 @@
 
 ###Screenshot
 
-![Image](/app/assets/images/yelp.png)
+![Image](/app/assets/images/Yelp.png)
 
 ###Objectives
 As an introduction to Rails, build a basic ratings site similar to Yelp.
