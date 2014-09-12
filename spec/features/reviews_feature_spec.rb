@@ -3,14 +3,8 @@ require 'rails_helper'
 describe 'reviewing restaurants' do
 
 	before(:each) do
-		visit '/users/sign_up'
-		fill_in 'user[email]', with: 'test@test.com'
-		fill_in 'user[password]', with: 'password'
-		fill_in 'user[password_confirmation]', with: 'password'
-		click_button('Sign up')
-	end
-
-	before(:each) do
+		dave = User.create(email: 'dave@test.com', password: '12345678', password_confirmation: '12345678')
+		login_as dave
 		Restaurant.create(name: 'McDonalds', cuisine: 'American')
 	end
 
@@ -22,14 +16,13 @@ describe 'reviewing restaurants' do
 		click_button 'Leave review'
 
 		expect(current_path).to eq restaurants_path
-		expect(page).to have_content 'Not bad ★★★☆☆'
+		expect(page).to have_content '★★★☆☆ Not bad'
 	end
 
 	it 'displays the average rating of each restaurant' do
 		restaurant = Restaurant.first
-		restaurant.reviews.create(thoughts: 'Meh', rating: '3')
-		restaurant.reviews.create(thoughts: 'Uh', rating: '5')
-		restaurant.reviews.create(thoughts: 'What?', rating: '1')
+		restaurant.reviews.create(thoughts: 'Meh', rating: '2')
+		restaurant.reviews.create(thoughts: 'Uh', rating: '4')
 		visit '/restaurants'
 		expect(page).to have_content 'McDonalds, American ★★★☆☆'
 	end

@@ -1,7 +1,7 @@
 
 <h1>Restaurant reviews</h1>
 
-<div><h3><%= link_to 'Add a restaurant', new_restaurant_path %></h3></div>
+<span><h3><%= link_to 'Add a restaurant', new_restaurant_path %></h3></span>
 
 <% if @restaurants.any? %>
 	<% @restaurants.each do |restaurant| %>
@@ -27,13 +27,18 @@
 					<% restaurant.reviews.each do |review| %>
 						<div class='review-container'>
 							<li>
-								<span class='review-text'><%= "#{review.thoughts}" %></span>
-								<span class='review-rating-likes'>
-									<%= "#{star_rating(review.rating)} - " %>
-									<span class='like_counter'><%= review.likes.count %></span>
-									<%=" like".pluralize(review.likes.count) %>
-									<%= link_to "Like", review_likes_path(review), class: 'like_link' if user_signed_in? %></span>
+								<span class='review-rating'>
+									<%= "#{star_rating(review.rating)}" %>
 								</span>
+								<span class='review-text'><%= "#{review.thoughts}" %></span>
+								<div class='review-info'>
+									Posted <%= time_ago_in_words(review.created_at) %> ago
+									<span class='review-likes'>
+										<span class='like_counter'><%= review.likes.count %></span>
+										<%=" like".pluralize(review.likes.count) %>
+										<%= link_to "Like", review_likes_path(review), class: 'like_link' if user_signed_in? %>
+									</span>
+								</div>
 							</li>
 						</div>
 					<% end %>

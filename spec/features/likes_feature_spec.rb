@@ -4,6 +4,8 @@ describe 'likes' do
 	before (:each) do
 		kfc = Restaurant.create(name: 'KFC', cuisine: 'Chicken')
 		kfc.reviews.create(rating: 3, thoughts: 'It was alright')
+
+		@dave = User.create(email: 'dave@test.com', password: '12345678', password_confirmation: '12345678')
 	end
 
 	it 'user cannot like a review when not signed in' do
@@ -12,11 +14,7 @@ describe 'likes' do
 	end
 
 	it 'user can like a review when signed in', js:true do
-		visit '/users/sign_up'
-		fill_in 'user[email]', with: 'test@test.com'
-		fill_in 'user[password]', with: 'password'
-		fill_in 'user[password_confirmation]', with: 'password'
-		click_button('Sign up')
+		login_as @dave
 
 		visit '/restaurants'
 		expect(page).to have_content '0 likes'

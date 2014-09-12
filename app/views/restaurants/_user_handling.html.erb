@@ -1,4 +1,5 @@
 <% if user_signed_in? %>
+	<div id='user-email'>Welcome, <%= current_user.email %></div>
 	<div id='header-button'><%= link_to "Edit account", edit_user_registration_path %></div>
 	<div id='header-link'><%= link_to "Sign out", destroy_user_session_path, method: :delete %></div>
 <% else %>
