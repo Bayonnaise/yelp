@@ -1,5 +1,5 @@
 ##Yelp
-**Makers Academy week 8
+**Makers Academy week 8**
 
 ###Screenshot
 
