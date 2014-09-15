@@ -1,4 +1,4 @@
-##Yelp
+##Yelp [![Code Climate](https://codeclimate.com/github/Bayonnaise/yelp/badges/gpa.svg)](https://codeclimate.com/github/Bayonnaise/yelp)
 **Makers Academy week 8**
 
 ###Screenshot
